@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Sistema de Reservas</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
@@ -19,10 +19,10 @@
 </head>
 <body>
     <div class="relative bg-white overflow-hidden">
-        <!-- compon     ent -->
+
         <div class="bg-white dark:bg-gray-900">
             <div class="flex justify-center h-screen">
-                <div class="hidden bg-cover lg:block lg:w-2/3" style="background-image: url(https://images.unsplash.com/photo-1616763355603-9755a640a287?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)">
+                <div class="hidden bg-cover lg:block lg:w-2/3" style="background-image: url({{Storage::url('image_323.jpg')}})">
                     <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
                         <div>
                             <h2 class="text-4xl font-bold text-white">Sistema de Reservas</h2>
@@ -37,20 +37,34 @@
 
                         <div class="text-center">
                             <h2 class="text-4xl font-bold text-center text-gray-700 dark:text-white">Sistema de Reservas</h2>
-
-                            <p class="mt-3 text-gray-500 dark:text-gray-300">Ingresa para realizar tu reserva</p>
                         </div>
 
                         <div class="mt-8">
-                            <div class="flex justify-between mb-2">
+                            <div class="flex flex-col mb-2 text-center">
                                 @if (Route::has('login'))
                                     @auth
-                                        <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Dashboard</a>
+                                        <div class="text-center">
+                                            <p class="mt-3 text-gray-500 dark:text-gray-300 mb-4">Ya estas logueado</p>
+                                            <a href="{{ url('/dashboard') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Inicio</a>
+                                        </div>
                                     @else
-                                        <a href="{{ route('login') }}" class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Log in</a>
+                                    <p class="mt-3 text-gray-500 dark:text-gray-300">Ingresa para realizar tu reserva</p>
+                                        <form action="{{ route('login') }}">
+                                            <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                                                <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                                    Ingresar
+                                                </span>
+                                              </button>
+                                        </form>
 
                                         @if (Route::has('register'))
-                                            <a href="{{ route('register') }}" class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500">Register</a>
+                                            <form action="{{ route('register') }}">
+                                                <button class="relative inline-flex items-center justify-center p-0.5 mb-2 mr-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+                                                    <span class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-900 rounded-md group-hover:bg-opacity-0">
+                                                        Registrarse
+                                                    </span>
+                                                </button>
+                                            </form>
                                         @endif
                                     @endauth
                                 @endif
