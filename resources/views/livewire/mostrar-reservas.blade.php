@@ -59,7 +59,7 @@
                                 @while($diaMes <= $finCalendario)
                                     <td>
                                         <div class="py-1 px-1 w-full flex justify-center">
-                                            <p class="text-xl font-bold text-center text-gray-800 dark:text-gray-400">{{$diaMes->day}}</p>
+                                            <p class="text-xl @if($diaMes->isToday()) border border-sky-400 @endif font-bold text-center text-gray-800 dark:text-gray-400">{{$diaMes->day}}</p>
                                         </div>
                                     </td>
                                     @if(($diaMes->dayOfWeek == 0) && ($diaMes != $finCalendario))

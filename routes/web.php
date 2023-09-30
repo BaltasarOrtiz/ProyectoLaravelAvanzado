@@ -31,4 +31,8 @@ Route::middleware([
         return view('reserva');
     })->name('reserva');
 
-});
+    Route::get('/misreservas',function(){
+        return view('misreservas');
+        })->name('misreservas');
+    });
+
