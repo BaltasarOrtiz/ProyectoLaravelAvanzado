@@ -1,6 +1,10 @@
 <div>
     <!-- component -->
-
+    @if (Session::get('success'))
+        <div class="alert alert-success mt-3">
+            <strong>{{Session::get('success')}}</strong><br>
+        </div>
+    @endif
     <div class="relative py-10 px-10 sm:max-w-xl sm:mx-auto">
         <div class="relative px-4 py-10 dark:bg-gray-600 mx-8 md:mx-0 shadow rounded-md sm:p-10">
             <div class="max-w-md mx-auto">
@@ -17,7 +21,7 @@
                             <div class="flex flex-col">
                                 <label class="leading-loose">Fecha a Reservar</label>
                                 <div class="relative focus-within:text-gray-600 text-gray-400">
-                                    <input type="date" class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="25/02/2020">
+                                    <input wire:model="fecha" type="date" name="fecha" class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="25/02/2020">
                                     <div class="absolute left-3 top-2">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                     </div>
@@ -26,7 +30,7 @@
                         </div>
                     </div>
                     <div class="pt-4 flex items-center space-x-4">
-                        <button class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none">Reservar</button>
+                        <button class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none" wire:click="crearReserva(, false)">Reservar</button>
                         <button class="bg-green-600 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none" wire:click="modal(true)">Pagar y Reservar</button>
                     </div>
                 </div>
@@ -49,7 +53,7 @@
                             <path d="M20 12v4h-4a2 2 0 0 1 0 -4h4" />
                         </svg>
                     </div>
-                    <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Enter Billing Details</h1>
+                    <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Ingrese Detalles de Facturación</h1>
                     <label class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Fecha a Reservar</label>
                     <div class="relative focus-within:text-gray-600 text-gray-400 pb-2">
                         <input type="date" class="pr-4 pl-10 py-2 mt-1 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="25/02/2020">
@@ -57,9 +61,9 @@
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                         </div>
                     </div>
-                    <label for="name" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Owner Name</label>
+                    <label for="name" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Nombre</label>
                     <input id="name" class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="James" />
-                    <label for="email2" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Card Number</label>
+                    <label for="email2" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Numero de Tarjeta</label>
                     <div class="relative mb-5 mt-2">
                         <div class="absolute text-gray-600 flex items-center px-4 border-r h-full">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-credit-card" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -72,7 +76,7 @@
                         </div>
                         <input id="email2" class="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-16 text-sm border-gray-300 rounded border" placeholder="XXXX - XXXX - XXXX - XXXX" />
                     </div>
-                    <label for="expiry" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Expiry Date</label>
+                    <label for="expiry" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Fecha de Expiración</label>
                     <div class="relative mb-5 mt-2">
                         <div class="absolute right-0 text-gray-600 flex items-center pr-3 h-full cursor-pointer">
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="20" height="20" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">

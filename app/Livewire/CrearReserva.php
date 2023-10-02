@@ -4,6 +4,9 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Reserva;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use phpDocumentor\Reflection\PseudoTypes\False_;
 
 class CrearReserva extends Component
 {
@@ -23,12 +26,25 @@ class CrearReserva extends Component
         }
     }
 
-    public function crearReserva(){
+    public function crearReserva($fecha, $pago){
+        dd($fecha, $pago);
+
         $this->validate([
             'fecha' => 'required',
+            'pago' => 'required',
         ]);
-        Reserva::create([
-            'fecha' => $this->fecha,
-        ]);
+
+        if ($pago == Null){
+            Reserva::create([
+                'fecha' => $fecha,
+                'pago' => false,
+            ]);
+        }else{
+            Reserva::create([
+                'fecha' => $fecha,
+                'pago' => true,
+            ]);
+        }
+        return redirect()->route('tasks.index')->with('success', 'Tarea creada satisfactoriamente.');
     }
 }
