@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('reservas', function (Blueprint $table) {
             $table->id();
             $table->date('fecha');
-            $table->boolean('pago');
+            $table->boolean('pago')->default(false);
             $table->unsignedBigInteger('id_cliente');
             $table->foreign('id_cliente')->references('id')->on('users');
             $table->timestamps();

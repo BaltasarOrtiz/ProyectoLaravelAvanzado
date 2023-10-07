@@ -57,9 +57,15 @@
                         <tbody>
                             <tr>
                                 @while($diaMes <= $finCalendario)
+                                    @php
+                                       $claseGray = '';
+                                        $claseHoy = '';
+                                            $claseGray = $diaMes->isToday() && in_array($diaMes->format('Y-m-d'), $reservas) ? 'dark:text-red-400' : ($diaMes->isToday() ? 'dark:text-green-400' : ($diaMes < $fechaActual ? 'dark:text-gray-500' : (in_array($diaMes->format('Y-m-d'), $reservas) ? 'dark:text-red-400' : 'dark:text-green-400')));
+                                            $claseHoy = $diaMes->isToday() && in_array($diaMes->format('Y-m-d'), $reservas) ? 'border border-sky-400 dark:text-red-400' : ($diaMes->isToday() ? 'border border-sky-400 dark:text-green-400' : '');
+                                        @endphp
                                     <td>
                                         <div class="py-1 px-1 w-full flex justify-center">
-                                            <p class="text-xl @if($diaMes->isToday()) border border-sky-400 @endif font-bold text-center text-gray-800 dark:text-gray-400">{{$diaMes->day}}</p>
+                                            <p class="text-xl font-bold  {{$claseGray}} {{$claseHoy}} text-center">{{$diaMes->day}}</p>
                                         </div>
                                     </td>
                                     @if(($diaMes->dayOfWeek == 0) && ($diaMes != $finCalendario))
@@ -72,7 +78,15 @@
                             </tr>
                         </tbody>
                     </table>
-
+                        <div class="mt-5 text-center dark:text-black font-bold">
+                            <div class="bg-green-500 rounded-full">
+                                <p>Disponible</p>
+                            </div>
+                            <div class="bg-red-500 rounded-full mt-2">
+                                <p>Reservado</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

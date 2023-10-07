@@ -9,10 +9,10 @@ use Illuminate\Contracts\View\View;
 
 class MostrarReservas extends Component
 {
-    public $fechaActual;
+    public $fecha;
     public $inicioCalendario;
     public $finCalendario;
-    public $fecha;
+    public $fechaActual;
     public $anio;
     public $diaMes;
     public $contMes = 1;
@@ -44,6 +44,7 @@ class MostrarReservas extends Component
         $this->anio = $this->fechaActual->copy()->year;
         $this->inicioSemana = $this->fechaActual->copy()->firstOfMonth()->startOfWeek();
         $this->diaMes = $this->inicioCalendario->copy()->startOfWeek();
+        $this->fecha = $this->fechaActual->copy();
         $this->reservas = Reserva::select('fecha')
             ->where('fecha', '>=', $this->inicioCalendario->format('Y-m-d'))
             ->where('fecha', '<=', $this->finCalendario->format('Y-m-d'))
@@ -54,13 +55,13 @@ class MostrarReservas extends Component
     public function incrementar($objeto)
     {
         #Instancia con la fecha y mes de la vista
-        $this->fechaActual =Carbon::createFromFormat('n/Y', $this->contMes.'/'.$this->anio);
+        $this->fecha =Carbon::createFromFormat('n/Y', $this->contMes.'/'.$this->anio);
         if($objeto == 'm'){
-            $this->inicioCalendario = $this->fechaActual->copy()->addMonth()->startOfMonth();
-            $this->finCalendario = $this->fechaActual->copy()->addMonth()->lastOfMonth();
+            $this->inicioCalendario = $this->fecha->copy()->addMonth()->startOfMonth();
+            $this->finCalendario = $this->fecha->copy()->addMonth()->lastOfMonth();
 
-            $this->contMes = $this->fechaActual->copy()->addMonth()->format('n');
-            $this->anio =(int) $this->fechaActual->copy()->addMonth()->year;
+            $this->contMes = $this->fecha->copy()->addMonth()->format('n');
+            $this->anio =(int) $this->fecha->copy()->addMonth()->year;
             $this->diaMes = $this->inicioCalendario->copy()->firstOfMonth()->startOfWeek();
             $this->reservas = Reserva::select('fecha')
             ->where('fecha', '>=', $this->inicioCalendario->format('Y-m-d'))
@@ -69,11 +70,11 @@ class MostrarReservas extends Component
             ->toArray();
         } else {
             #Si es A es porque se incremente el año
-            $this->inicioCalendario = $this->fechaActual->copy()->addYear()->startOfMonth();
-            $this->finCalendario = $this->fechaActual->copy()->addYear()->lastOfMonth();
+            $this->inicioCalendario = $this->fecha->copy()->addYear()->startOfMonth();
+            $this->finCalendario = $this->fecha->copy()->addYear()->lastOfMonth();
 
-            $this->contMes = $this->fechaActual->copy()->addYear()->format('n');
-            $this->anio = (int) $this->fechaActual->copy()->addYear()->year;
+            $this->contMes = $this->fecha->copy()->addYear()->format('n');
+            $this->anio = (int) $this->fecha->copy()->addYear()->year;
             $this->diaMes = $this->inicioCalendario->copy()->firstOfMonth()->startOfWeek();
             $this->reservas = Reserva::select('fecha')
             ->where('fecha', '>=', $this->inicioCalendario->format('Y-m-d'))
@@ -86,14 +87,14 @@ class MostrarReservas extends Component
     public function decrementar($objeto)
     {
         #Instancia con la fecha y mes de la vista
-        $this->fechaActual =Carbon::createFromFormat('n/Y', $this->contMes.'/'.$this->anio);
+        $this->fecha =Carbon::createFromFormat('n/Y', $this->contMes.'/'.$this->anio);
 
         if($objeto == 'm'){
-            $this->inicioCalendario = $this->fechaActual->copy()->subMonth()->startOfMonth();
-            $this->finCalendario = $this->fechaActual->copy()->subMonth()->lastOfMonth();
+            $this->inicioCalendario = $this->fecha->copy()->subMonth()->startOfMonth();
+            $this->finCalendario = $this->fecha->copy()->subMonth()->lastOfMonth();
 
-            $this->contMes = $this->fechaActual->copy()->subMonth()->format('n');
-            $this->anio =(int) $this->fechaActual->copy()->subMonth()->year;
+            $this->contMes = $this->fecha->copy()->subMonth()->format('n');
+            $this->anio =(int) $this->fecha->copy()->subMonth()->year;
             $this->diaMes = $this->inicioCalendario->copy()->firstOfMonth()->startOfWeek();
             $this->reservas = Reserva::select('fecha')
             ->where('fecha', '>=', $this->inicioCalendario->format('Y-m-d'))
@@ -102,11 +103,11 @@ class MostrarReservas extends Component
             ->toArray();
         } else {
             #Si es A es porque se decrementa el año
-            $this->inicioCalendario = $this->fechaActual->copy()->subYear()->startOfMonth();
-            $this->finCalendario = $this->fechaActual->copy()->subYear()->lastOfMonth();
+            $this->inicioCalendario = $this->fecha->copy()->subYear()->startOfMonth();
+            $this->finCalendario = $this->fecha->copy()->subYear()->lastOfMonth();
 
-            $this->contMes = $this->fechaActual->copy()->subYear()->format('n');
-            $this->anio = (int) $this->fechaActual->copy()->subYear()->year;
+            $this->contMes = $this->fecha->copy()->subYear()->format('n');
+            $this->anio = (int) $this->fecha->copy()->subYear()->year;
             $this->diaMes = $this->inicioCalendario->copy()->firstOfMonth()->startOfWeek();
             $this->reservas = Reserva::select('fecha')
             ->where('fecha', '>=', $this->inicioCalendario->format('Y-m-d'))

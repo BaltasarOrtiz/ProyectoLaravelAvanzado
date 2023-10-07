@@ -12,6 +12,7 @@ class CrearReserva extends Component
 {
 
     public $open=false;
+    public $fecha, $cvc;
 
     public function render()
     {
@@ -26,25 +27,14 @@ class CrearReserva extends Component
         }
     }
 
-    public function crearReserva($fecha, $pago){
-        dd($fecha, $pago);
-
-        $this->validate([
-            'fecha' => 'required',
-            'pago' => 'required',
+    public function crearReserva(){
+        $id_cliente = auth()->user()->id;
+        // Se crea una reserva nueva
+        $reserva = Reserva::create([
+            'fecha' => $this->fecha,
+            'id_cliente' => $id_cliente,
         ]);
-
-        if ($pago == Null){
-            Reserva::create([
-                'fecha' => $fecha,
-                'pago' => false,
-            ]);
-        }else{
-            Reserva::create([
-                'fecha' => $fecha,
-                'pago' => true,
-            ]);
-        }
-        return redirect()->route('tasks.index')->with('success', 'Tarea creada satisfactoriamente.');
+        // Se redirecciona a la vista de reservas
+        return redirect()->route('dashboard');
     }
 }
