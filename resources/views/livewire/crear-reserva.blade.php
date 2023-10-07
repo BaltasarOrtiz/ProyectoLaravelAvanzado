@@ -68,7 +68,7 @@
                     </div>
                     <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Ingrese Detalles de Facturación</h1>
                     <label for="name" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Nombre</label>
-                    <x-input id="name" class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="James" />
+                    <input id="name" class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="James" />
                     <label for="email2" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Numero de Tarjeta</label>
                     <div class="relative mb-5 mt-2">
                         <div class="absolute text-gray-600 flex items-center px-4 border-r h-full">

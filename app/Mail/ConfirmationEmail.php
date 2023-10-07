@@ -17,13 +17,12 @@ class ConfirmationEmail extends Mailable
      * Create a new message instance.
      */
     public $subject = 'Confirmation Email';
-    public $contacto;
+    public $info;
     public $user;
 
-    public function __construct($contacto,$user)
+    public function __construct($info)
     {
-        $this->contacto = $contacto;
-        $this->user = $user;
+        $this->info = $info;
     }
 
     /**

@@ -27,9 +27,9 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/reserva', function () {
-        return view('reserva');
-    })->name('reserva');
+    Route::get('/reservar', function () {
+        return view('reservar');
+    })->name('reservar');
 
     Route::get('/misreservas',function(){
         return view('misreservas');

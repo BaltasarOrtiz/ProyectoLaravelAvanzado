@@ -15,7 +15,7 @@ class CrearReserva extends Component
 {
 
     public $open=false;
-    public $fecha, $cvc, $fechaActual, $reservas;
+    public $fecha, $fechaActual, $reservas;
 
     public function render()
     {
@@ -40,16 +40,15 @@ class CrearReserva extends Component
         $reserva = Reserva::create(
             [
                 'fecha' => $this->fecha,
-                'id_cliente' => $id_cliente,
                 'pago' => $paga,
+                'id_cliente' => $id_cliente
             ]
         );
         if ($paga){
             $user = auth()->user();
-            $correo = new ConfirmationEmail($reserva,$user);
+            $correo = new ConfirmationEmail(['user' => $user, 'reserva' => $reserva]);
             Mail::to($user->email)->send($correo);
         }
-
         // Se redirecciona a la vista de reservas
         return redirect()->route('dashboard');
     }

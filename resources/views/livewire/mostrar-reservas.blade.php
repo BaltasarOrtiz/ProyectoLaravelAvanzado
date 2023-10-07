@@ -86,6 +86,7 @@
                                 <p>Reservado</p>
                             </div>
                         </div>
+                        <a href="{{route('reservar')}}" class="bg-blue-500 flex justify-center items-center w-full text-white px-2 py-2 mt-4 rounded-md focus:outline-none">Reservar</a>
                     </div>
                 </div>
             </div>

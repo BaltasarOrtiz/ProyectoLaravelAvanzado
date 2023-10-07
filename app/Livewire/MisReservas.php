@@ -4,11 +4,15 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Reserva;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ConfirmationEmail;
+
 
 class MisReservas extends Component
 {
 
     public $open=false;
+    public $reserva;
 
     public function render()
     {
@@ -18,9 +22,10 @@ class MisReservas extends Component
         ]);
     }
 
-    public function modal($band){
+    public function modal($band,$reserva){
         if ($band) {
             $this->open=true;
+            $this->reserva=$reserva;
         }else{
             $this->open=false;
         }
@@ -31,10 +36,13 @@ class MisReservas extends Component
         $reserva->delete();
     }
 
-    public function pagar(Reserva $reserva)
+    public function pagar()
     {
-        $reserva->update([
-            'pagado' => true
-        ]);
+        $this->reserva = Reserva::find($this->reserva['id']);
+        $this->reserva->update(['pago' => true]);
+        $user = auth()->user();
+        $correo = new ConfirmationEmail(['user' => $user, 'reserva' => $this->reserva]);
+        Mail::to($user->email)->send($correo);
+        $this->open=false;
     }
 }
