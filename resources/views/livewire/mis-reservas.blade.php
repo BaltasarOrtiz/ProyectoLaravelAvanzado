@@ -31,12 +31,14 @@
                             @php
                                 $disabled = '';
                                 $cursor = '';
+                                $blur='';
                                 if ($res->pago == 1) {
                                     $disabled = 'disabled';
                                     $cursor = 'cursor-not-allowed';
+                                    $blur = 'opacity-20';
                                 }
                             @endphp
-                            <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 {{$cursor}}" {{$disabled}} wire:click="modal(true)">Pagar</button>
+                            <button type="button" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 {{$cursor}} {{$blur}}" {{$disabled}} wire:click="modal(true)">Pagar</button>
                         </td>
                         <td class="px-6 py-4 text-center">
                             <button type="button" class="focus:outline-none text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-900" wire:click="delete({{$res}})">Cancelar</button>

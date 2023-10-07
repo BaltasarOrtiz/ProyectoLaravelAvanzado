@@ -21,17 +21,30 @@
                             <div class="flex flex-col">
                                 <label class="leading-loose">Fecha a Reservar</label>
                                 <div class="relative focus-within:text-gray-600 text-gray-400">
-                                    <input wire:model="fecha" type="date" name="fecha" class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="25/02/2020">
+                                    <input wire:model.live="fecha" type="date" name="fecha" class="pr-4 pl-10 py-2 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="25/02/2020">
                                     <div class="absolute left-3 top-2">
                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        @php
+                            $fechaIncorrecta = '';
+                            $disabled = '';
+                        @endphp
+                        @if ($fecha != null and $fecha >= $fechaActual and !in_array($fecha,$reservas))
+                            <p class="text-green-500 text-md italic mt-2 font-bold">¡Fecha disponible!</p>
+                        @else
+                            <p class="text-red-300 text-md italic mt-2 font-bold">Fecha invalida o reservada</p>
+                            @php
+                                $fechaIncorrecta = 'cursor-not-allowed opacity-20';
+                                $disabled = 'disabled';
+                            @endphp
+                        @endif
                     </div>
                     <div class="pt-4 flex items-center space-x-4">
-                        <button class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none" wire:click="crearReserva()">Reservar</button>
-                        <button class="bg-green-600 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none" wire:click="modal(true)">Pagar y Reservar</button>
+                        <button class="bg-blue-500 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none {{$fechaIncorrecta}}" {{$disabled}} wire:click="crearReserva(false)">Reservar</button>
+                        <button class="bg-green-600 flex justify-center items-center w-full text-white px-4 py-3 rounded-md focus:outline-none {{$fechaIncorrecta}}" {{$disabled}} wire:click="modal(true)">Pagar y Reservar</button>
                     </div>
                 </div>
             </div>
@@ -54,15 +67,8 @@
                         </svg>
                     </div>
                     <h1 class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4">Ingrese Detalles de Facturación</h1>
-                    <label class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Fecha a Reservar</label>
-                    <div class="relative focus-within:text-gray-600 text-gray-400 pb-2">
-                        <input wire:model="fecha" type="date" class="pr-4 pl-10 py-2 mt-1 border focus:ring-gray-500 focus:border-gray-900 w-full sm:text-sm border-gray-300 rounded-md focus:outline-none text-gray-600" placeholder="25/02/2020">
-                        <div class="absolute left-3 top-2">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                        </div>
-                    </div>
                     <label for="name" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Nombre</label>
-                    <input id="name" class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="James" />
+                    <x-input id="name" class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="James" />
                     <label for="email2" class="text-gray-800 text-sm font-bold leading-tight tracking-normal">Numero de Tarjeta</label>
                     <div class="relative mb-5 mt-2">
                         <div class="absolute text-gray-600 flex items-center px-4 border-r h-full">
@@ -95,7 +101,7 @@
                         <input id="cvc" class="mb-8 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border" placeholder="MM/YY" />
                     </div>
                     <div class="flex items-center justify-start w-full">
-                        <button class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm" wire:click="crearReserva()">Pagar y Reservar</button>
+                        <button class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm" wire:click="crearReserva(true)">Pagar y Reservar</button>
                         <button class="focus:outline-none focus:ring-2 focus:ring-offset-2  focus:ring-gray-400 ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm" wire:click="modal(false)">Cancelar</button>
                     </div>
                 </div>
