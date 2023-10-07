@@ -22,7 +22,7 @@
 
         <div class="bg-white dark:bg-gray-900">
             <div class="flex justify-center h-screen">
-                <div class="hidden bg-cover lg:block lg:w-2/3" style="background-image: url({{Storage::url('image_323.jpg')}})">
+                <div class="hidden bg-cover lg:block lg:w-2/3" style="background-image: url('https://cdn.discordapp.com/attachments/1139720770776481863/1160286910594437160/image_323.jpg?ex=65341c64&is=6521a764&hm=a58aa3b99157d2592d1e27ee6111bad8de163a190df8cb9aec88938d5a30e89f&')">
                     <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
                         <div>
                             <h2 class="text-4xl font-bold text-white">Sistema de Reservas</h2>
