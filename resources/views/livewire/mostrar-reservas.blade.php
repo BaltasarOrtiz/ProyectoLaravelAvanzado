@@ -58,7 +58,7 @@
                             <tr>
                                 @while($diaMes <= $finCalendario)
                                     @php
-                                       $claseGray = '';
+                                        $claseGray = '';
                                         $claseHoy = '';
                                             $claseGray = $diaMes->isToday() && in_array($diaMes->format('Y-m-d'), $reservas) ? 'dark:text-red-400' : ($diaMes->isToday() ? 'dark:text-green-400' : ($diaMes < $fechaActual ? 'dark:text-gray-500' : (in_array($diaMes->format('Y-m-d'), $reservas) ? 'dark:text-red-400' : 'dark:text-green-400')));
                                             $claseHoy = $diaMes->isToday() && in_array($diaMes->format('Y-m-d'), $reservas) ? 'border border-sky-400 dark:text-red-400' : ($diaMes->isToday() ? 'border border-sky-400 dark:text-green-400' : '');

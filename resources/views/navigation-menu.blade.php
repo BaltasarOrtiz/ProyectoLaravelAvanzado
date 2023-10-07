@@ -18,6 +18,9 @@
                     <x-nav-link href="{{ route('reserva') }}" :active="request()->routeIs('reserva')">
                         {{ __('Reservar') }}
                     </x-nav-link>
+                    <x-nav-link href="{{ route('misreservas') }}" :active="request()->routeIs('misreservas')">
+                        {{ __('Mis Reservas') }}
+                    </x-nav-link>
                 </div>
             </div>
 

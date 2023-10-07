@@ -33,6 +33,7 @@ Route::middleware([
 
     Route::get('/misreservas',function(){
         return view('misreservas');
-        })->name('misreservas');
-    });
+    })->name('misreservas');
+
+});
 
